@@ -29,8 +29,7 @@ class JiraApiClient extends Client
         // Plugin authentication.
         $auth = $config->get('authentication');
         if ($auth['method'] == 'Basic') {
-            $client->getConfig()->setPath('request.options/auth', array($auth['jira_username'], $auth['password'], 'Basic|Digest');
-            $client->getEventDispatcher()->addSubscriber($plugin);
+            $client->getConfig()->setPath('request.options/auth', array($auth['jira_username'], $auth['password'], 'Basic|Digest'));
         }
 
         // Set the service description.

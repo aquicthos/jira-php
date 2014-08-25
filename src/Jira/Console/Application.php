@@ -6,6 +6,7 @@ use Jira\Api\JiraApiClient;
 use Jira\Command\JiraApiClientCommand;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Console\Application as BaseApplication;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Yaml\Yaml;
 
 class Application extends BaseApplication
@@ -25,7 +26,7 @@ class Application extends BaseApplication
         $configValues = array();
 
         $configDirectories = array(
-            __DIR__ . '/../../lib',
+            __DIR__ . '/../../../lib',
             '/etc/jira-api',
             getenv('HOME') . '/.jira-api',
         );
@@ -35,9 +36,12 @@ class Application extends BaseApplication
         try {
             $jiraApiConfig = $locator->locate('jira-api.yml', null, false);
         } catch (\InvalidArgumentException $exception) {
+            $output = new ConsoleOutput();
             $output->writeln("\t<error>                                                        </error>");
             $output->writeln("\t<error>  Couldn't find jira-api.yml. Please create it.         </error>");
             $output->writeln("\t<error>                                                        </error>");
+            $output->writeln(" ");
+            exit();
         }
 
         foreach ($jiraApiConfig as $config) {
