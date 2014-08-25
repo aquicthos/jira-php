@@ -1,0 +1,25 @@
+{
+  "name": "JiraApiClient",
+  "apiVersion": "0.1",
+  "description": "JIRA REST API client",
+  "operations": {
+    "getIssue": {
+      "httpMethod": "GET",
+      "uri": "issue/{issueKey}",
+      "summary": "Retrieve an issue",
+      "parameters": {
+        "issueKey": {
+          "$ref": "IssueParameter"
+        }
+      }
+    }
+  },
+  "models": {
+    "IssueParameter": {
+      "description": "A JIRA issue ID or key, e.g. DEMO-1234.",
+      "location": "uri",
+      "required": true,
+      "type": "string"
+    }
+  }
+}

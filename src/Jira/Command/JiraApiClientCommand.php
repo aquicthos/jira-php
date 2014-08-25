@@ -16,9 +16,9 @@ class JiraApiClientCommand extends BaseCommand
     {
         $this->operation = $operation;
         $operationArray = $operation->toArray();
-        $commandName = implode(':', explode('/', preg_replace('/\.json$/', '', $operationArray['uri'])));
+        $commandName = $operation->getName();
         parent::__construct($commandName);
-        $this->setDescription($operationArray['summary']);
+        $this->setDescription($operation->getSummary());
 
         foreach($this->operation->getParams() as $parameter) {
             if ($parameter->getRequired()) {
@@ -96,7 +96,7 @@ EOT
         }
 
         $result = call_user_func_array(
-            array($client, lcfirst($method)),
+            array($client, $method),
             array($arguments)
         );
         $output->writeln($this->processResponse($result));

@@ -19,6 +19,24 @@ class Application extends BaseApplication
         $this->api = null;
         $this->loadConfig();
         $this->getApiClient();
+        parent::__construct('jira-php', '@git-version@');
+    }
+
+    /**
+     * @override
+     */
+    public function getLongVersion()
+    {
+        if (('@' . 'git-version@') !== $this->getVersion()) {
+            return sprintf(
+                '<info>%s</info> version <comment>%s</comment> build <comment>%s</comment>',
+                $this->getName(),
+                $this->getVersion(),
+                '@git-commit@'
+            );
+        }
+
+        return '<info>' . $this->getName() . '</info> (repo)';
     }
 
     protected function loadConfig()
@@ -70,6 +88,7 @@ class Application extends BaseApplication
 
         $client = $this->getApiClient();
         $apiDescription = $client->getDescription();
+
         foreach ($apiDescription->getOperations() as $operation) {
             $commands[] = new JiraApiClientCommand($operation);
         }

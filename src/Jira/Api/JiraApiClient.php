@@ -24,16 +24,17 @@ class JiraApiClient extends Client
         $config = Collection::fromConfig($config, $default, $required);
 
         // Create a new client.
-        $client = new self($config->get('base_url'), $config);
+        $base_url = $config->get('base_url') . '/rest/api/2';
+        $client = new self($base_url, $config);
 
         // Plugin authentication.
         $auth = $config->get('authentication');
         if ($auth['method'] == 'Basic') {
-            $client->getConfig()->setPath('request.options/auth', array($auth['jira_username'], $auth['password'], 'Basic|Digest'));
+            $client->getConfig()->setPath('request.options/auth', array($auth['jira_username'], $auth['password'], 'Basic'));
         }
 
         // Set the service description.
-        $pathToServiceDescription = __DIR__ . '/../../lib/JiraApiClient.json';
+        $pathToServiceDescription = __DIR__ . '/../../../lib/JiraApiClient.json';
         $client->setDescription(ServiceDescription::factory($pathToServiceDescription));
 
         return $client;
