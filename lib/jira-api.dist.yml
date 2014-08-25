@@ -1,0 +1,4 @@
+authentication:
+    method:         Basic
+    jira_username:  ~
+    password:       ~
