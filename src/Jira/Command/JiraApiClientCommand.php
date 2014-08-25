@@ -29,13 +29,13 @@ class JiraApiClientCommand extends BaseCommand
             }
         }
 
-        $this->setHelp(<<<EOT
-The <info>{$commandName}</info> command {$operationArray['summary']}
+        $helpText = "<info>{$commandName}</info>: {$operationArray['summary']}";
+        $helpText .= "\n\n" . "<info>php jira.php {$commandName} options</info>";
+        if (!empty($operationArray['data']['documentation'])) {
+            $helpText .= "\n\nDocumentation: {$operationArray['data']['documentation']}";
+        }
 
-<info>php jira.php {$commandName} options</info>
-
-EOT
-        );
+        $this->setHelp($helpText);
     }
 
     protected function configure()

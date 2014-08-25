@@ -6,10 +6,18 @@
     "getIssue": {
       "httpMethod": "GET",
       "uri": "issue/{issueKey}",
-      "summary": "Retrieve an issue",
+      "summary": "Retrieve an issue.",
+      "data": {
+        "documentation": "https://docs.atlassian.com/jira/REST/latest/#d2e3392"
+      },
       "parameters": {
         "issueKey": {
           "$ref": "IssueParameter"
+        },
+        "fields": {
+          "description": "A comma-separated list of fields to include in the response.",
+          "location": "query",
+          "type": "string"
         }
       }
     }
