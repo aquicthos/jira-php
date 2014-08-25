@@ -105,23 +105,7 @@ class JiraApiClientCommand extends BaseCommand
     protected function processResponse($result)
     {
         $output = "\n<info>Response from API:</info>\n";
-
-        if (isset($result['realms'])) {
-            foreach($result['realms'] as $realm) {
-                $output .= sprintf("\t<comment>%s</comment>\n", $realm);
-            }
-        } elseif (isset($result['ticket'])) {
-            if (is_string($result['ticket'])) {
-                $result['ticket'] = array($result['ticket']);
-            }
-            foreach($result['ticket'] as $ticket) {
-                $output .= sprintf("\t<comment>Ticket: https://jira/browse/%s</comment>\n", $ticket);
-            }
-        } else {
-            $output .= sprintf("\t<comment>Unknown Response</comment>\n");
-            $output .= print_r($result,1);
-        }
-
+        $output .= print_r($result, TRUE);
         return $output;
     }
 }
