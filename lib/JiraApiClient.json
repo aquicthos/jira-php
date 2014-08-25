@@ -1,21 +1,58 @@
 {
   "name": "JiraApiClient",
   "apiVersion": "0.1",
-  "description": "JIRA REST API client",
+  "description": "JIRA REST API client.",
   "operations": {
+
     "getIssue": {
-      "httpMethod": "GET",
       "uri": "issue/{issueKey}",
       "summary": "Retrieve an issue.",
+      "httpMethod": "GET",
       "data": {
-        "documentation": "https://docs.atlassian.com/jira/REST/latest/#d2e3392"
+        "documentation": "https://docs.atlassian.com/jira/REST/6.3/#d2e4020"
       },
       "parameters": {
         "issueKey": {
-          "$ref": "IssueParameter"
+          "$ref": "IssueParameter",
+          "required": true
         },
         "fields": {
-          "description": "A comma-separated list of fields to include in the response.",
+          "$ref": "FieldsParameter"
+        }
+      }
+    },
+
+    "search": {
+      "uri": "search",
+      "summary": "Searches for issues using JQL.",
+      "httpMethod": "GET",
+      "data": {
+        "documentation": "https://docs.atlassian.com/jira/REST/6.3/#d2e5109"
+      },
+      "parameters": {
+        "jql": {
+          "$ref": "JqlParameter"
+        },
+        "startsAt": {
+          "description": "The index of the first issue to return (0-based).",
+          "location": "query",
+          "type": "integer"
+        },
+        "maxResults": {
+          "description": "The maximum number of issues to return (defaults to 50).",
+          "location": "query",
+          "type": "integer"
+        },
+        "validateQuery": {
+          "description": "Whether to validate the JQL query.",
+          "location": "query",
+          "type": "boolean"
+        },
+        "fields": {
+          "$ref": "FieldsParameter"
+        },
+        "expand": {
+          "description": "A comma-separated list of the parameters to expand.",
           "location": "query",
           "type": "string"
         }
@@ -23,10 +60,19 @@
     }
   },
   "models": {
+    "FieldsParameter": {
+      "description": "A comma-separated list of fields to include in the response.",
+      "location": "query",
+      "type": "string"
+    },
     "IssueParameter": {
       "description": "A JIRA issue ID or key, e.g. DEMO-1234.",
       "location": "uri",
-      "required": true,
+      "type": "string"
+    },
+    "JqlParameter": {
+      "description": "A full JQL expression, including an ORDER BY clause.",
+      "location": "query",
       "type": "string"
     }
   }
