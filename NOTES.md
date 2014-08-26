@@ -8,7 +8,8 @@
 * [ ] Authentication configuration.
 * [ ] Devise method for getting and saving user API key or use OAuth token.
 * [ ] Abstract appending rest/api/2 to base URL.
-* [ ] Fix tests
+* [ ] Fix tests.
+* [ ] Documentation.
 
 
 # Services to add
