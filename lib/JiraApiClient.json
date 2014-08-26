@@ -4,6 +4,24 @@
   "description": "JIRA REST API client.",
   "operations": {
 
+    "getGroup": {
+      "uri": "group",
+      "summary": "Retrieve a group.",
+      "httpMethod": "GET",
+      "data": {
+        "documentation": "https://docs.atlassian.com/jira/REST/6.3/#d2e560"
+      },
+      "parameters": {
+        "groupname": {
+          "$ref": "GroupParameter",
+          "required": true
+        },
+        "expand": {
+          "$ref": "ExpandParameter"
+        }
+      }
+    },
+
     "getIssue": {
       "uri": "issue/{issueKey}",
       "summary": "Retrieve an issue.",
@@ -18,6 +36,55 @@
         },
         "fields": {
           "$ref": "FieldsParameter"
+        }
+      }
+    },
+
+    "getProject": {
+      "uri": "project/{projectKey}",
+      "summary": "Retrieve a project.",
+      "httpMethod": "GET",
+      "data": {
+        "documentation": "https://docs.atlassian.com/jira/REST/6.3/#d2e114"
+      },
+      "parameters": {
+        "projectKey": {
+          "$ref": "ProjectParameter",
+          "required": true
+        }
+      }
+    },
+
+    "getProjectRoles": {
+      "uri": "project/{projectKey}/role",
+      "summary": "Retrieve project roles.",
+      "httpMethod": "GET",
+      "data": {
+        "documentation": "https://docs.atlassian.com/jira/REST/6.3/#d2e1682"
+      },
+      "parameters": {
+        "projectKey": {
+          "$ref": "ProjectParameter",
+          "required": true
+        }
+      }
+    },
+
+    "getProjectRole": {
+      "uri": "project/{projectKey}/role/{id}",
+      "summary": "Retrieve a project role.",
+      "httpMethod": "GET",
+      "data": {
+        "documentation": "https://docs.atlassian.com/jira/REST/6.3/#d2e1682"
+      },
+      "parameters": {
+        "projectKey": {
+          "$ref": "ProjectParameter",
+          "required": true
+        },
+        "id": {
+          "$ref": "IdParameter",
+          "required": true
         }
       }
     },
@@ -60,9 +127,24 @@
     }
   },
   "models": {
+    "ExpandParameter": {
+      "description": "List of fields to expand.",
+      "location": "query",
+      "type": "string"
+    },
     "FieldsParameter": {
       "description": "A comma-separated list of fields to include in the response.",
       "location": "query",
+      "type": "string"
+    },
+    "GroupParameter": {
+      "description": "A JIRA group name.",
+      "location": "query",
+      "type": "string"
+    },
+    "IdParameter": {
+      "description": "A general ID or key.",
+      "location": "uri",
       "type": "string"
     },
     "IssueParameter": {
@@ -73,6 +155,11 @@
     "JqlParameter": {
       "description": "A full JQL expression, including an ORDER BY clause.",
       "location": "query",
+      "type": "string"
+    },
+    "ProjectParameter": {
+      "description": "A JIRA project ID or key, e.g. DEMO.",
+      "location": "uri",
       "type": "string"
     }
   }
