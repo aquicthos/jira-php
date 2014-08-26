@@ -12,6 +12,9 @@ class JiraApiClientCommand extends BaseCommand
 {
     protected $operation;
 
+    /**
+     * @var $operation \Guzzle\Service\Description\Operation
+     */
     public function __construct($operation)
     {
         $this->operation = $operation;
@@ -20,6 +23,9 @@ class JiraApiClientCommand extends BaseCommand
         parent::__construct($commandName);
         $this->setDescription($operation->getSummary());
 
+        /**
+         * @var $parameter \Guzzle\Service\Description\Parameter
+         */
         foreach($this->operation->getParams() as $parameter) {
             if ($parameter->getRequired()) {
                 $this->addArgument($parameter->getName(), InputArgument::REQUIRED, $parameter->getDescription());

@@ -89,6 +89,9 @@ class Application extends BaseApplication
         $client = $this->getApiClient();
         $apiDescription = $client->getDescription();
 
+        /**
+         * @var $operation \Guzzle\Service\Description\Operation
+         */
         foreach ($apiDescription->getOperations() as $operation) {
             $commands[] = new JiraApiClientCommand($operation);
         }
