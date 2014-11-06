@@ -22,6 +22,72 @@
       }
     },
 
+    "createUser": {
+      "uri": "user",
+      "summary": "Create a user.",
+      "httpMethod": "POST",
+      "data": {
+        "documentation": "https://docs.atlassian.com/jira/REST/6.3/#d2e4163"
+      },
+      "parameters": {
+        "name": {
+          "$ref": "JsonParameter",
+          "required": true
+        },
+        "password": {
+          "$ref": "JsonParameter",
+          "required": false
+        },
+        "emailAddress": {
+          "$ref": "JsonParameter",
+          "required": true
+        },
+        "displayName": {
+          "$ref": "JsonParameter",
+          "required": true
+        }
+      }
+    },
+
+    "searchUsers": {
+      "uri": "user/search",
+      "summary": "Retrieve a user.",
+      "httpMethod": "GET",
+      "data": {
+        "documentation": "https://docs.atlassian.com/jira/REST/6.3/#d2e4436"
+      },
+      "parameters": {
+        "username": {
+          "$ref": "UserParameter",
+          "required": true
+        }
+      }
+    },
+
+    "searchAssignableUsers": {
+      "uri": "user/assignable/search",
+      "summary": "Retrieve a user.",
+      "httpMethod": "GET",
+      "data": {
+        "documentation": "https://docs.atlassian.com/jira/REST/6.3/#d2e4436"
+      },
+      "parameters": {
+        "project": {
+          "$ref": "ProjectQueryParameter",
+          "required": true
+        },
+        "username": {
+          "$ref": "UserParameter",
+          "required": false
+        },
+        "maxResults": {
+          "description": "The maximum number of users to return (defaults to 50).",
+          "location": "query",
+          "type": "string"
+        }
+      }
+    },
+
     "getIssue": {
       "uri": "issue/{issueKey}",
       "summary": "Retrieve an issue.",
@@ -36,6 +102,74 @@
         },
         "fields": {
           "$ref": "FieldsParameter"
+        }
+      }
+    },
+
+    "getIssueMetadata": {
+      "uri": "issue/{issueKey}/editmeta",
+      "summary": "Retrieve an issue's metadata.",
+      "httpMethod": "GET",
+      "data": {
+        "documentation": "https://docs.atlassian.com/jira/REST/6.3/#d2e830"
+      },
+      "parameters": {
+        "issueKey": {
+          "$ref": "IssueParameter",
+          "required": true
+        }
+      }
+    },
+
+    "getIssueComments": {
+      "uri": "issue/{issueKey}/comment",
+      "summary": "Retrieve an issue's comments.",
+      "httpMethod": "GET",
+      "data": {
+        "documentation": "https://docs.atlassian.com/jira/REST/6.3/#d2e4574"
+      },
+      "parameters": {
+        "issueKey": {
+          "$ref": "IssueParameter",
+          "required": true
+        }
+      }
+    },
+
+    "createIssue" : {
+      "uri": "issue/{issueKey}",
+      "summary": "Create an issue.",
+      "httpMethod": "POST",
+      "data": {
+        "documentation": "https://docs.atlassian.com/jira/REST/6.3/#d2e4020"
+      },
+      "parameters": {
+        "fields": {
+          "$ref": "JsonParameter",
+          "required": true
+        },
+        "update": {
+          "$ref": "JsonParameter"
+        }
+      }
+    },
+
+    "addIssueAttachment" : {
+      "uri": "issue/{issueKey}/attachments",
+      "summary": "Create an issue.",
+      "httpMethod": "POST",
+      "data": {
+        "documentation": "https://docs.atlassian.com/jira/REST/6.3/#d2e4020"
+      },
+      "parameters": {
+        "issueKey": {
+          "$ref": "IssueParameter",
+          "required": true
+        },
+        "file": {
+          "location": "postFile",
+          "type": "string",
+          "required": true
         }
       }
     },
@@ -100,15 +234,15 @@
         "jql": {
           "$ref": "JqlParameter"
         },
-        "startsAt": {
+        "startAt": {
           "description": "The index of the first issue to return (0-based).",
           "location": "query",
-          "type": "integer"
+          "type": "string"
         },
         "maxResults": {
           "description": "The maximum number of issues to return (defaults to 50).",
           "location": "query",
-          "type": "integer"
+          "type": "string"
         },
         "validateQuery": {
           "description": "Whether to validate the JQL query.",
@@ -127,6 +261,10 @@
     }
   },
   "models": {
+    "JsonParameter": {
+      "description": "Field to go into the body of the request.",
+      "location": "json"
+    },
     "ExpandParameter": {
       "description": "List of fields to expand.",
       "location": "query",
@@ -139,6 +277,11 @@
     },
     "GroupParameter": {
       "description": "A JIRA group name.",
+      "location": "query",
+      "type": "string"
+    },
+    "UserParameter": {
+      "description": "A JIRA user name.",
       "location": "query",
       "type": "string"
     },
@@ -160,6 +303,11 @@
     "ProjectParameter": {
       "description": "A JIRA project ID or key, e.g. DEMO.",
       "location": "uri",
+      "type": "string"
+    },
+    "ProjectQueryParameter": {
+      "description": "A JIRA project ID or key, e.g. DEMO but in the query string.",
+      "location": "query",
       "type": "string"
     }
   }
