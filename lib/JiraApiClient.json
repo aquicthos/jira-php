@@ -121,6 +121,21 @@
       }
     },
 
+    "getIssueComments": {
+      "uri": "issue/{issueKey}/comment",
+      "summary": "Retrieve an issue's comments.",
+      "httpMethod": "GET",
+      "data": {
+        "documentation": "https://docs.atlassian.com/jira/REST/6.3/#d2e4574"
+      },
+      "parameters": {
+        "issueKey": {
+          "$ref": "IssueParameter",
+          "required": true
+        }
+      }
+    },
+
     "createIssue" : {
       "uri": "issue/{issueKey}",
       "summary": "Create an issue.",
@@ -135,6 +150,26 @@
         },
         "update": {
           "$ref": "JsonParameter"
+        }
+      }
+    },
+
+    "addIssueAttachment" : {
+      "uri": "issue/{issueKey}/attachments",
+      "summary": "Create an issue.",
+      "httpMethod": "POST",
+      "data": {
+        "documentation": "https://docs.atlassian.com/jira/REST/6.3/#d2e4020"
+      },
+      "parameters": {
+        "issueKey": {
+          "$ref": "IssueParameter",
+          "required": true
+        },
+        "file": {
+          "location": "postFile",
+          "type": "string",
+          "required": true
         }
       }
     },
@@ -199,10 +234,10 @@
         "jql": {
           "$ref": "JqlParameter"
         },
-        "startsAt": {
+        "startAt": {
           "description": "The index of the first issue to return (0-based).",
           "location": "query",
-          "type": "integer"
+          "type": "string"
         },
         "maxResults": {
           "description": "The maximum number of issues to return (defaults to 50).",
