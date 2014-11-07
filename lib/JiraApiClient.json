@@ -136,6 +136,21 @@
       }
     },
 
+    "getIssueWatchers": {
+      "uri": "issue/{issueKey}/watchers",
+      "summary": "Retrieve an issue's watchers.",
+      "httpMethod": "GET",
+      "data": {
+        "documentation": "https://docs.atlassian.com/jira/REST/6.3/#d2e4574"
+      },
+      "parameters": {
+        "issueKey": {
+          "$ref": "IssueParameter",
+          "required": true
+        }
+      }
+    },
+
     "createIssue" : {
       "uri": "issue/{issueKey}",
       "summary": "Create an issue.",
