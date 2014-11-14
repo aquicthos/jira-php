@@ -1,14 +1,14 @@
 {
-    "name": "webbj74/jira-php",
+    "name": "acquia-pso/jira-php",
     "type": "library",
     "description": "An experimental PHP SDK for JIRA.",
     "keywords": ["jira"],
-    "homepage": "https://github.com/webbj74/jira-php",
+    "homepage": "https://github.com/acquia-pso/jira-php",
     "license": "MIT",
     "authors": [
         {
             "name": "See contributors",
-            "homepage": "https://github.com/webbj74/jira-php/graphs/contributors"
+            "homepage": "https://github.com/acquia-pso/jira-php/graphs/contributors"
         }
     ],
     "require": {
